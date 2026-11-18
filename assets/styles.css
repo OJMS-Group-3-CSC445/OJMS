@@ -1,12 +1,12 @@
 :root {
-  --navy: #1f2a44;
-  --crimson: #9b1c1c;
+  --navy: #1E293B;
+  --crimson: #991B1B;
   --crimson-dark: #7f1717;
   --cream: #faf8f3;
   --white: #ffffff;
   --ink: #1f2a44;
   --muted: #6b7a90;
-  --border: #e6e2d9;
+  --border: #E2E8F0;
 
   --font-serif: "Lora", Georgia, serif;
   --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -148,7 +148,7 @@ a {
   gap: 32px;
 }
 .nav a {
-  font-size: 13px;
+  font-size: 16px;
   color: #cbd5e1;
   padding: 4px 0;
   white-space: nowrap;
@@ -196,13 +196,13 @@ a {
   font-size: 1.1rem;
 }
 .footer-brand span {
-  font-size: 0.75rem;
+  font-size: 16px;
   color: #c3cbdb;
 }
 .footer-links {
   display: flex;
   gap: 14px;
-  font-size: 0.75rem;
+  font-size: 16px;
   color: #c3cbdb;
 }
 .footer-links a:hover,
@@ -211,7 +211,7 @@ a {
   text-decoration: underline;
 }
 .footer-email {
-  font-size: 0.75rem;
+  font-size: 16px;
   justify-self: end;
 }
 .copyright {

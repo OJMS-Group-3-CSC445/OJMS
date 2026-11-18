@@ -1,10 +1,11 @@
 (function () {
+  const root = document.body.dataset.root || "";
   const links = [
-    { key: "home", label: "Home", href: "index.html" },
-    { key: "about", label: "About", href: "about.html" },
-    { key: "current-issue", label: "Current issue", href: "current-issue.html" },
-    { key: "archives", label: "Archives", href: "archives.html" },
-    { key: "contact", label: "Contact us", href: "contact.html" },
+    { key: "home", label: "Home", href: `${root}index.html` },
+    { key: "about", label: "About", href: `${root}about.html` },
+    { key: "current-issue", label: "Current issue", href: `${root}current-issue.html` },
+    { key: "archives", label: "Archives", href: `${root}archives.html` },
+    { key: "contact", label: "Contact us", href: `${root}contact.html` },
   ];
 
   const current = document.body.dataset.page;
@@ -19,15 +20,15 @@
   const headerHTML = `
     <header class="site-header" id="siteHeader">
       <div class="container header-inner">
-        <a class="brand" href="index.html">
+        <a class="brand" href="${root}index.html">
           <span class="brand-mark">O</span>
           <span>Journal of Applied Scholarship</span>
         </a>
         <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="siteNav">Menu</button>
         <nav class="nav" id="siteNav" aria-label="Main">${navLinks}</nav>
         <div class="auth">
-          <a class="btn btn-outline" href="login.html">Log in</a>
-          <a class="btn btn-pill" href="register.html">Register</a>
+          <a class="btn btn-outline" href="${root}auth/login.html">Log in</a>
+          <a class="btn btn-pill" href="${root}auth/register.html">Register</a>
         </div>
       </div>
     </header>`;
