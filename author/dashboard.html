@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#faf9f6">
+  <title>My submissions | OJMS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css">
+  <link rel="stylesheet" href="./dashboard.css">
+</head>
+<body class="author-dashboard">
+  <header class="author-header">
+    <a class="author-identity" href="#dashboard" aria-label="OJMS author dashboard">
+      <span class="author-mark" aria-hidden="true">OJ</span>
+      <span class="author-name">[Author name]</span>
+    </a>
+    <nav class="author-nav" aria-label="Author navigation">
+      <a class="is-current" href="#dashboard" aria-current="page">Dashboard</a>
+      <a href="#submit-manuscript">Submit manuscript</a>
+      <a class="author-nav-name" href="#profile">[Author name]</a>
+      <a href="#logout">Log out</a>
+    </nav>
+  </header>
+
+  <main id="dashboard" class="author-main">
+    <section class="submissions" aria-labelledby="submissions-title">
+      <div class="submissions-heading">
+        <div>
+          <h1 id="submissions-title">My submissions</h1>
+          <p>Track the status of your manuscripts and access submission details.</p>
+        </div>
+        <a class="submit-button" href="#submit-manuscript">Submit Manuscript</a>
+      </div>
+
+      <div class="table-scroll" tabindex="0" aria-label="Submission list, scroll horizontally on smaller screens" hidden>
+        <table class="submission-table">
+          <thead>
+            <tr>
+              <th scope="col">Title</th>
+              <th scope="col">Date submitted</th>
+              <th scope="col">Status</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody id="submission-rows"></tbody>
+        </table>
+      </div>
+
+      <section class="empty-state" aria-labelledby="empty-state-title">
+        <h2 id="empty-state-title">You haven't submitted a manuscript yet</h2>
+        <p>Submit your first manuscript to begin tracking its review status.</p>
+        <a class="empty-submit-button" href="#submit-manuscript">Submit Manuscript</a>
+      </section>
+    </section>
+  </main>
+
+  <footer class="author-footer">
+    <div class="footer-topline">
+      <div class="footer-brand">
+        <strong>OJMS</strong>
+        <span>Open-access scholarly publishing</span>
+      </div>
+      <nav class="footer-links" aria-label="Journal links">
+        <a href="#about">About</a>
+        <a href="#current-issue">Current issue</a>
+        <a href="#archives">Archives</a>
+        <a href="#contact">Contact us</a>
+      </nav>
+      <nav class="footer-support" aria-label="Support links">
+        <a href="#editorial-office">Editorial office</a>
+        <span aria-hidden="true">|</span>
+        <a href="#support">Support</a>
+      </nav>
+    </div>
+    <p class="copyright">© 2026 [Journal name]. All rights reserved.</p>
+  </footer>
+
+  <dialog class="submission-dialog" aria-labelledby="dialog-heading">
+    <header class="dialog-header">
+      <h2 id="dialog-heading">Submission details</h2>
+      <button class="dialog-close" type="button" aria-label="Close details">×</button>
+    </header>
+    <div class="dialog-content">
+      <h3 id="dialog-title"></h3>
+      <section class="dialog-field">
+        <h4>Abstract</h4>
+        <p id="dialog-abstract"></p>
+      </section>
+      <section class="dialog-field">
+        <h4>Manuscript file</h4>
+        <p id="dialog-file" class="dialog-file"></p>
+      </section>
+      <section class="dialog-field">
+        <h4>Date submitted</h4>
+        <p id="dialog-date"></p>
+      </section>
+      <section class="dialog-field dialog-status-field">
+        <h4>Status</h4>
+        <p><span id="dialog-status" class="status"></span></p>
+        <p id="dialog-status-note" class="dialog-note"></p>
+      </section>
+      <section class="dialog-field">
+        <h4>Decision date</h4>
+        <p id="dialog-decision-date" class="dialog-note"></p>
+      </section>
+      <button class="download-link" type="button" disabled>Download File</button>
+    </div>
+    <button class="dialog-bottom-close" type="button">Close</button>
+  </dialog>
+  <script src="./dashboard.js"></script>
+</body>
+</html>
