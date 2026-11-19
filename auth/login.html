@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Log in | OJMS</title>
+  <!-- Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:wght@500;600;700&display=swap" rel="stylesheet">
+  <!-- Styles -->
+  <link rel="stylesheet" href="../assets/styles.css">
+  <link rel="stylesheet" href="auth.css">
+</head>
+<body class="login-page" data-page="login" data-root="../">
+  <div id="site-header"></div>
+
+  <main class="login-main">
+    <section class="login-card" aria-labelledby="login-title">
+      <header class="login-card-header">
+        <h1 id="login-title">Log in</h1>
+        <p>Author, reviewer, editor and administrator users.</p>
+      </header>
+
+      <form class="login-form" action="#" method="post">
+        <div class="form-field">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" autocomplete="email" required>
+        </div>
+
+        <div class="form-field">
+            <label for="password">Password</label>
+            <div class="password-field">
+                    <input id="password" name="password" type="password" autocomplete="current-password" required>
+                    <button class="password-toggle" type="button" aria-label="Show password" aria-pressed="false">Show</button>
+            </div>
+        </div>
+
+        <button class="login-submit" type="submit">Log in</button>
+        <div class="Register-link">
+            <p>New author?</p>
+            <a href="register.html">Register</a>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="../Js/layout.js"></script>
+  <script src="login.js"></script>
+</body>
+</html>
