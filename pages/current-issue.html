@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Current Issue | OJMS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/styles.css">
+    <link rel="stylesheet" href="../assets/current-issue.css">
+</head>
+<body data-page="current-issue" data-root="../">
+    <div id="site-header"></div>
+
+        <main>
+            <section class="container" style="padding: 56px 24px;">
+                <div class="issue-heading">
+                    <h1 id="issue-title">Loading issue...</h1>
+                    <p class="issue-number" id="issue-number"></p>
+                    <p class="issue-date" id="issue-date"></p>
+                </div>
+
+                <!-- Article cards will be generated here -->
+                <div class="articles-container" id="articles-container">
+                    <p>Loading...</p>
+                </div>
+
+                <!-- Browse Archives -->
+                <a href="archives.html" class="browse-archives">
+                    Browse Archives <span aria-hidden="true">→</span>
+                </a>
+            </section>
+        </main>
+
+    <div id="site-footer"></div>
+    <script src="../Js/layout.js"></script>
+    <script src="../Js/current-issue.js"></script>
+</body>
+</html>
