@@ -1,92 +1,215 @@
-const sampleSubmissions = [
-  {
-    title: "The role of open access in modern scholarship",
-    abstract: "This abstract summarizes the manuscript and its contribution to current scholarly publishing practice.",
-    file: "open-access-scholarship.docx",
-    date: "16 Nov 2026",
-    status: "Pending Review",
-    statusNote: "Your manuscript is being reviewed.",
-    decisionDate: "Not yet available",
-    statusClass: "status-pending",
-  },
-  { title: "Editorial workflows for emerging journals", date: "08 Nov 2026", status: "Under Review", statusClass: "status-review" },
-  { title: "A framework for sustainable publishing", date: "27 Oct 2026", status: "Accepted", statusClass: "status-accepted" },
-  { title: "Digital archives and scholarly access", date: "14 Oct 2026", status: "Rejected", statusClass: "status-rejected" },
-  { title: "Peer review transparency in practice", date: "02 Oct 2026", status: "Pending Review", statusClass: "status-pending" },
-];
+(function () {
+  const api = window.OJMSApi;
+  const tableScroll = document.querySelector(".table-scroll");
+  const emptyState = document.querySelector(".empty-state");
+  const submissionRows = document.querySelector("#submission-rows");
+  const feedback = document.querySelector("#dashboard-feedback");
+  const pagination = document.querySelector(".submission-pagination");
+  const detailsDialog = document.querySelector(".submission-dialog");
+  const pageLabel = pagination.querySelector("span");
+  let currentPage = 1;
+  let lastPage = 1;
 
-// Demo rows are kept out of the default view. Replace this source with the
-// authenticated author's API response when the backend is connected.
-const isDemoView = new URLSearchParams(window.location.search).has("demo");
-const submissions = isDemoView ? sampleSubmissions : [];
-const tableScroll = document.querySelector(".table-scroll");
-const emptyState = document.querySelector(".empty-state");
-const submissionRows = document.querySelector("#submission-rows");
-const detailsDialog = document.querySelector(".submission-dialog");
-const dialogTitle = document.querySelector("#dialog-title");
-const dialogDate = document.querySelector("#dialog-date");
-const dialogStatus = document.querySelector("#dialog-status");
-const dialogAbstract = document.querySelector("#dialog-abstract");
-const dialogFile = document.querySelector("#dialog-file");
-const dialogStatusNote = document.querySelector("#dialog-status-note");
-const dialogDecisionDate = document.querySelector("#dialog-decision-date");
+  const statusLabels = {
+    draft: "Draft",
+    pending_review: "Pending Review",
+    under_review: "Under Review",
+    accepted: "Accepted",
+    accept: "Accept",
+    rejected: "Rejected",
+    reject: "Reject",
+    revisions_required: "Revisions Required",
+    published: "Published",
+  };
 
-function addCell(row, text, tagName = "td", className = "") {
-  const cell = document.createElement(tagName);
-  cell.textContent = text;
-  if (className) cell.className = className;
-  row.append(cell);
-  return cell;
-}
+  function setFeedback(message, kind = "info") {
+    feedback.textContent = message;
+    feedback.dataset.kind = kind;
+    feedback.hidden = !message;
+  }
 
-submissions.forEach((submission, index) => {
-  const row = document.createElement("tr");
-  addCell(row, submission.title, "th");
-  row.lastElementChild.scope = "row";
-  addCell(row, submission.date);
+  function formatDate(value) {
+    if (!value) return "Not available";
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) return String(value);
+    return new Intl.DateTimeFormat(undefined, { day: "2-digit", month: "short", year: "numeric" }).format(date);
+  }
 
-  const statusCell = row.insertCell();
-  const status = document.createElement("span");
-  status.className = `status ${submission.statusClass}`;
-  status.textContent = submission.status;
-  statusCell.append(status);
+  function readableStatus(status) {
+    return statusLabels[String(status || "").toLowerCase()] || String(status || "Unknown").replaceAll("_", " ");
+  }
 
-  const actionCell = row.insertCell();
-  const detailsButton = document.createElement("button");
-  detailsButton.className = "details-button";
-  detailsButton.type = "button";
-  detailsButton.dataset.submission = String(index);
-  detailsButton.textContent = "View Details";
-  actionCell.append(detailsButton);
-  submissionRows.append(row);
-});
+  function statusClass(status) {
+    switch (String(status || "").toLowerCase()) {
+      case "pending_review": return "status-pending";
+      case "under_review": return "status-review";
+      case "accepted":
+      case "published": return "status-accepted";
+      case "rejected": return "status-rejected";
+      default: return "status-review";
+    }
+  }
 
-const isEmpty = submissions.length === 0;
-document.body.classList.toggle("is-empty", isEmpty);
-tableScroll.hidden = isEmpty;
-emptyState.hidden = !isEmpty;
+  function addCell(row, text, tagName = "td", className = "") {
+    const cell = document.createElement(tagName);
+    cell.textContent = text;
+    if (className) cell.className = className;
+    row.append(cell);
+    return cell;
+  }
 
-submissionRows.addEventListener("click", (event) => {
-  const button = event.target.closest("[data-submission]");
-  if (!button) return;
+  function renderRows(articles) {
+    submissionRows.replaceChildren();
+    articles.forEach((article) => {
+      const row = document.createElement("tr");
+      const titleCell = addCell(row, article.title || "Untitled manuscript", "th");
+      titleCell.scope = "row";
+      addCell(row, formatDate(article.submitted_at || article.created_at));
 
-  const submission = submissions[Number(button.dataset.submission)];
-  if (!submission) return;
+      const statusCell = row.insertCell();
+      const status = document.createElement("span");
+      status.className = `status ${statusClass(article.status)}`;
+      status.textContent = readableStatus(article.status);
+      statusCell.append(status);
 
-  dialogTitle.textContent = submission.title;
-  dialogAbstract.textContent = submission.abstract || "Details are not available for this sample submission.";
-  dialogFile.textContent = submission.file || "Not available";
-  dialogDate.textContent = submission.date;
-  dialogStatus.textContent = submission.status;
-  dialogStatusNote.textContent = submission.statusNote || "";
-  dialogDecisionDate.textContent = submission.decisionDate || "Not available";
-  detailsDialog.showModal();
-});
+      const actionCell = row.insertCell();
+      const detailsButton = document.createElement("button");
+      detailsButton.className = "details-button";
+      detailsButton.type = "button";
+      detailsButton.dataset.articleId = String(article.id);
+      detailsButton.textContent = "View Details";
+      actionCell.append(detailsButton);
+      submissionRows.append(row);
+    });
+  }
 
-document.querySelectorAll(".dialog-close, .dialog-bottom-close").forEach((button) => {
-  button.addEventListener("click", () => detailsDialog.close());
-});
+  function updatePagination(meta) {
+    currentPage = Number(meta.current_page || currentPage || 1);
+    lastPage = Number(meta.last_page || 1);
+    pageLabel.textContent = `Page ${currentPage} of ${lastPage}`;
+    pagination.hidden = lastPage <= 1;
+    pagination.querySelector('[data-page="previous"]').disabled = currentPage <= 1;
+    pagination.querySelector('[data-page="next"]').disabled = currentPage >= lastPage;
+  }
 
-detailsDialog.addEventListener("click", (event) => {
-  if (event.target === detailsDialog) detailsDialog.close();
-});
+  function showListState(hasRows, showEmpty = false) {
+    tableScroll.hidden = !hasRows;
+    emptyState.hidden = !showEmpty;
+    document.body.classList.toggle("is-empty", showEmpty);
+  }
+
+  async function loadArticles(page = 1) {
+    currentPage = page;
+    setFeedback("Loading your submissions…");
+    showListState(false);
+    pagination.hidden = true;
+    try {
+      const payload = await api.request(`/my-articles?page=${encodeURIComponent(page)}`);
+      const result = payload.data || {};
+      const articles = Array.isArray(result) ? result : (result.data || []);
+      renderRows(articles);
+      showListState(articles.length > 0, articles.length === 0);
+      updatePagination(Array.isArray(result) ? {} : result);
+      setFeedback("");
+    } catch (error) {
+      showListState(false);
+      setFeedback(error.message || "Could not load your submissions.", "error");
+    }
+  }
+
+  function setText(selector, value) {
+    const target = detailsDialog.querySelector(selector);
+    target.textContent = value || "Not available";
+  }
+
+  function renderReviews(reviews) {
+    const section = document.querySelector("#dialog-review-section");
+    const list = document.querySelector("#dialog-reviews");
+    list.replaceChildren();
+    const visibleReviews = Array.isArray(reviews) ? reviews : [];
+    visibleReviews.forEach((review) => {
+      const item = document.createElement("li");
+      const recommendation = review.recommendation ? `${readableStatus(review.recommendation)}: ` : "";
+      item.textContent = `${recommendation}${review.comments || review.comment || "Feedback provided"}`;
+      list.append(item);
+    });
+    section.hidden = visibleReviews.length === 0;
+  }
+
+  async function openDetails(articleId) {
+    const title = document.querySelector("#dialog-title");
+    const download = document.querySelector("#file-download");
+    title.textContent = "Loading submission…";
+    setText("#dialog-abstract", "");
+    setText("#dialog-file", "");
+    setText("#dialog-date", "");
+    setText("#dialog-status", "Loading…");
+    setText("#dialog-status-note", "");
+    setText("#dialog-decision-date", "");
+    download.hidden = true;
+    renderReviews([]);
+    detailsDialog.showModal();
+
+    try {
+      const payload = await api.request(`/my-articles/${encodeURIComponent(articleId)}`);
+      const article = payload.data?.article || payload.data;
+      title.textContent = article.title || "Untitled manuscript";
+      setText("#dialog-abstract", article.abstract);
+      setText("#dialog-file", article.original_filename || "Manuscript file");
+      setText("#dialog-date", formatDate(article.submitted_at || article.created_at));
+      const status = detailsDialog.querySelector("#dialog-status");
+      status.textContent = readableStatus(article.status);
+      status.className = `status ${statusClass(article.status)}`;
+      setText("#dialog-status-note", article.decision_remarks || "Your manuscript status is up to date.");
+      setText("#dialog-decision-date", formatDate(article.decided_at));
+      if (article.document_url) {
+        download.href = article.document_url;
+        download.hidden = false;
+      }
+      renderReviews(article.reviews);
+    } catch (error) {
+      title.textContent = "Submission details unavailable";
+      setText("#dialog-abstract", error.message || "Could not load this manuscript.");
+    }
+  }
+
+  submissionRows.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-article-id]");
+    if (button) openDetails(button.dataset.articleId);
+  });
+
+  document.querySelectorAll(".dialog-close, .dialog-bottom-close").forEach((button) => {
+    button.addEventListener("click", () => detailsDialog.close());
+  });
+  detailsDialog.addEventListener("click", (event) => {
+    if (event.target === detailsDialog) detailsDialog.close();
+  });
+
+  pagination.addEventListener("click", (event) => {
+    const direction = event.target.dataset.page;
+    if (direction === "previous" && currentPage > 1) loadArticles(currentPage - 1);
+    if (direction === "next" && currentPage < lastPage) loadArticles(currentPage + 1);
+  });
+
+  document.querySelector('[data-action="logout"]').addEventListener("click", async (event) => {
+    const button = event.currentTarget;
+    button.disabled = true;
+    setFeedback("Signing out…");
+    try {
+      await api.request("/logout", { method: "POST" });
+      setFeedback("You have been signed out.");
+    } catch (error) {
+      setFeedback(`${error.message} Your local session has been cleared.`, "error");
+    } finally {
+      api.setToken(null);
+      button.disabled = false;
+    }
+  });
+
+  if (!api.getToken()) {
+    showListState(false);
+    setFeedback("Sign in to view your submissions. This page needs an author access token.", "error");
+  } else {
+    loadArticles();
+  }
+})();

@@ -132,17 +132,15 @@ OJMS-Frontend/
 
 ## 6. Getting Started
 
-Setup instructions will be updated once the development environment and dependencies have been finalized.
+This author dashboard is a static HTML/CSS/JavaScript frontend and does not need a package install. Serve the repository with the development server used by the team; opening the HTML files directly may prevent API requests because of browser origin restrictions.
 
-General workflow:
+### Author API integration
 
-1. Clone the repository.
-2. Navigate into the frontend directory.
-3. Install the required dependencies.
-4. Configure environment variables where necessary.
-5. Start the development server.
+The author pages use the API base URL `http://127.0.0.1:8000/api` by default. To change it, define `window.OJMS_API_BASE_URL` before loading `author/api.js`, or update the default in `author/api.js`.
 
-Use the package manager and commands specified by the development team.
+The dashboard expects the sign-in flow to store the bearer access token in session storage using the key `ojms_access_token` (or call `OJMSApi.setToken(token)`). The login page is not part of this frontend section yet. Requests send the token in the `Authorization` header and use the documented `/my-articles`, `/my-articles/{article}`, `/articles`, and `/logout` routes. Manuscript uploads use `FormData` and leave the multipart content type boundary to the browser.
+
+When the frontend and API use different origins, the API server must allow the frontend origin and the `Authorization`, `Accept`, and `Content-Type` headers through CORS.
 
 Never commit API keys, passwords, tokens, or private environment configuration files.
 
