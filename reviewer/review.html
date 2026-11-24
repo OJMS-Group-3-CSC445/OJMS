@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Review manuscript | OJMS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="reviewer.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand">
+        <span class="avatar" aria-hidden="true">OJ</span>
+        <span class="brand-name" data-user-name></span>
+      </div>
+      <nav class="main-nav" aria-label="Main">
+        <a href="dashboard.html" class="nav-link is-active" aria-current="page">Dashboard</a>
+      </nav>
+      <button type="button" class="logout" data-logout>Log out</button>
+    </div>
+  </header>
+
+  <main id="main" class="page page--narrow">
+    <a href="dashboard.html" class="back-link">Back to dashboard</a>
+
+    <div class="state" id="loading" role="status">
+      <p>Loading manuscript…</p>
+    </div>
+
+    <div class="state" id="error" role="alert" hidden>
+      <p id="error-message"></p>
+      <button type="button" class="btn" id="retry">Try again</button>
+    </div>
+
+    <div id="content" hidden>
+      <h1 class="page-title" id="page-title"></h1>
+
+      <section class="card" aria-labelledby="manuscript-heading">
+        <h2 class="card__title" id="manuscript-heading">Manuscript</h2>
+        <div class="meta-grid">
+          <div>
+            <span class="label">Title</span>
+            <p class="value value--strong" id="man-title"></p>
+          </div>
+          <div>
+            <span class="label">Date assigned</span>
+            <p class="value" id="man-date"></p>
+          </div>
+        </div>
+        <span class="label">Abstract</span>
+        <p class="value" id="man-abstract"></p>
+        <a class="link" id="man-download" href="#" target="_blank" rel="noopener" hidden>Download File</a>
+      </section>
+
+      <!-- Shown while the review has not been submitted -->
+      <section class="card" id="form-card" aria-labelledby="review-heading" hidden>
+        <h2 class="card__title" id="review-heading">Your review</h2>
+
+        <form id="review-form" novalidate>
+          <div class="field">
+            <label class="label" for="comments">Comments *</label>
+            <textarea class="textarea" id="comments" name="comments" rows="4"
+                      placeholder="Write your comments" required aria-describedby="comments-error"></textarea>
+            <p class="error" id="comments-error" hidden></p>
+          </div>
+
+          <fieldset class="field">
+            <legend class="label">Recommendation *</legend>
+            <div class="radio-grid">
+              <label class="radio-option">
+                <input type="radio" name="recommendation" value="accept"> Recommend Acceptance
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="recommendation" value="reject"> Recommend Rejection
+              </label>
+            </div>
+            <p class="error" id="recommendation-error" hidden></p>
+          </fieldset>
+
+          <!-- ASSUMED copy: the Figma frame is cut off here. Confirm the wording with the designer. -->
+          <p class="note">Your recommendation is advisory. The Editor-in-Chief makes the final decision.</p>
+
+          <p class="error" id="form-error" role="alert" hidden></p>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn--primary btn--lg">Submit Review</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Shown once the review has been submitted (read only) -->
+      <section class="card" id="submitted-card" aria-labelledby="submitted-heading" hidden>
+        <h2 class="card__title" id="submitted-heading">Your review</h2>
+        <div class="stack">
+          <div>
+            <span class="label">Comments</span>
+            <p class="value value--pre" id="submitted-comments"></p>
+          </div>
+          <div>
+            <span class="label">Recommendation</span>
+            <p class="recommendation" id="submitted-recommendation"></p>
+          </div>
+        </div>
+        <p class="submitted-on" id="submitted-on"></p>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <p class="footer-logo">OJMS</p>
+        <p class="footer-tagline">Open-access scholarly publishing</p>
+      </div>
+      <nav class="footer-links" aria-label="Footer">
+        <a href="../pages/support.html">Support</a>
+        <a href="../pages/contact.html">Contact us</a>
+      </nav>
+      <a href="mailto:editorial@ojms.org" class="footer-office">Editorial office</a>
+      <p class="footer-copy">&copy; <span data-year>2026</span> OJMS. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <dialog class="modal" id="confirm-dialog" aria-labelledby="confirm-title">
+    <h2 class="modal__title" id="confirm-title">Submit your review?</h2>
+    <p class="modal__text">You can't change it afterwards.</p>
+    <div class="modal__actions">
+      <button type="button" class="btn btn--primary btn--lg" id="confirm-submit">Submit</button>
+      <button type="button" class="btn btn--lg" data-close>Cancel</button>
+    </div>
+  </dialog>
+
+  <script src="../author/api.js"></script>
+  <script src="../auth/guard.js" data-role="reviewer"></script>
+  <script src="reviewer-core.js"></script>
+  <script src="review.js"></script>
+</body>
+</html>
