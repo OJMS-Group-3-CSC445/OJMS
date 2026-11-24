@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#faf9f6">
+  <title>All submissions | OJMS</title>
+  <script src="../author/api.js"></script>
+  <script src="../auth/guard.js" data-role="editor_in_chief"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css">
+  <link rel="stylesheet" href="./dashboard.css">
+</head>
+<body class="editor-dashboard">
+  <header class="editor-header">
+    <a class="editor-identity" href="./dashboard.html" aria-label="OJMS Editor-in-Chief dashboard">
+      <span class="editor-mark" aria-hidden="true">OJ</span>
+      <span class="editor-identity-copy">
+        <span class="editor-name">[Editor name]</span>
+        <span class="editor-role">Editor-in-Chief</span>
+      </span>
+    </a>
+    <nav class="editor-nav" aria-label="Editor navigation">
+      <a class="is-current" href="./dashboard.html" aria-current="page">Dashboard</a>
+    </nav>
+    <button class="editor-logout" type="button" data-action="logout">Log out</button>
+  </header>
+
+  <main class="editor-main">
+    <section class="editor-submissions" aria-labelledby="submissions-title">
+      <h1 id="submissions-title">All submissions</h1>
+      <p class="editor-feedback" id="editor-feedback" role="status" aria-live="polite" hidden></p>
+
+      <div class="editor-empty-state" id="editor-empty-state" role="status" aria-live="polite">
+        Loading submissions…
+      </div>
+
+      <div class="editor-table-wrap" id="editor-table-wrap" hidden>
+        <table class="editor-table">
+          <thead>
+            <tr>
+              <th scope="col">Manuscript</th>
+              <th scope="col">Author</th>
+              <th scope="col">Submitted</th>
+              <th scope="col">Status</th>
+            </tr>
+          </thead>
+          <tbody id="editor-submission-rows"></tbody>
+        </table>
+      </div>
+
+      <nav class="editor-pagination" id="editor-pagination" aria-label="Submissions pages" hidden>
+        <button type="button" data-page="previous">Previous</button>
+        <span aria-live="polite"></span>
+        <button type="button" data-page="next">Next</button>
+      </nav>
+    </section>
+  </main>
+
+  <footer class="editor-footer">
+    <div class="editor-footer-top">
+      <div class="editor-footer-brand">
+        <strong>OJMS</strong>
+        <span>Open-access scholarly publishing</span>
+      </div>
+      <nav class="editor-footer-links" aria-label="Support links">
+        <a href="mailto:editorial@ojms.org?subject=OJMS%20support">Support</a>
+        <a href="../pages/contact.html">Contact us</a>
+      </nav>
+      <a class="editor-office" href="mailto:editorial@ojms.org">Editorial office</a>
+    </div>
+    <p class="editor-copyright">&copy; <span id="copyright-year"></span> [Journal name]. All rights reserved.</p>
+  </footer>
+
+  <script src="./dashboard.js"></script>
+</body>
+</html>
