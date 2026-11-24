@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Reviewers | OJMS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand">
+        <span class="avatar" aria-hidden="true">OJ</span>
+        <span class="brand-name">Journal of Applied Scholarship</span>
+      </div>
+      <nav class="main-nav" aria-label="Main">
+        <a href="dashboard.html" class="nav-link">Dashboard</a>
+        <a href="reviewers.html" class="nav-link is-active" aria-current="page">Reviewers</a>
+      </nav>
+      <button type="button" class="logout" data-logout>Log out</button>
+    </div>
+  </header>
+
+  <main id="main" class="page">
+    <div class="page-head">
+      <h1 class="page-title">Reviewers</h1>
+      <button type="button" class="btn btn--primary btn--sm" data-add>Add Reviewer</button>
+    </div>
+
+    <div class="banner" id="banner" role="status" hidden>
+      <p id="banner-text"></p>
+      <button type="button" class="banner__close" id="banner-close" aria-label="Dismiss message">&times;</button>
+    </div>
+
+    <div class="state" id="loading" role="status">
+      <p>Loading reviewers…</p>
+    </div>
+
+    <div class="state" id="error" role="alert" hidden>
+      <p id="error-message"></p>
+      <button type="button" class="btn" id="retry">Try again</button>
+    </div>
+
+    <div class="state" id="empty" hidden>
+      <p class="state__title">No reviewers yet</p>
+      <button type="button" class="btn btn--primary btn--sm" data-add>Add Reviewer</button>
+    </div>
+
+    <div class="table-wrap" id="table" hidden>
+      <table class="data-table">
+        <caption class="visually-hidden">Reviewers</caption>
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+          </tr>
+        </thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+
+    <nav class="pager" id="pager" aria-label="Pagination" hidden>
+      <button type="button" class="btn btn--sm" id="prev">Previous</button>
+      <span id="page-info"></span>
+      <button type="button" class="btn btn--sm" id="next">Next</button>
+    </nav>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <p class="footer-logo">OJMS</p>
+        <p class="footer-tagline">Open-access scholarly publishing</p>
+      </div>
+      <nav class="footer-links" aria-label="Footer">
+        <a href="reviewers.html">Reviewers</a>
+        <a href="../pages/support.html">Support</a>
+        <a href="../pages/contact.html">Contact us</a>
+      </nav>
+      <a href="mailto:editorial@ojms.org" class="footer-office">Editorial office</a>
+      <p class="footer-copy">&copy; <span data-year>2026</span> OJMS. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <dialog class="modal modal--form" id="add-dialog" aria-labelledby="add-title">
+    <h2 class="modal__title" id="add-title">Add reviewer</h2>
+    <p class="modal__text">Create a reviewer account and assign manuscripts later.</p>
+
+    <form id="add-form" novalidate>
+      <div class="field field--tight">
+        <label class="label" for="surname">Surname</label>
+        <input class="input" id="surname" name="surname" type="text" autocomplete="off" required aria-describedby="error-surname">
+        <p class="error" id="error-surname" hidden></p>
+      </div>
+      <div class="field field--tight">
+        <label class="label" for="other_names">Other names</label>
+        <input class="input" id="other_names" name="other_names" type="text" autocomplete="off" required aria-describedby="error-other_names">
+        <p class="error" id="error-other_names" hidden></p>
+      </div>
+      <div class="field field--tight">
+        <label class="label" for="email">Email</label>
+        <input class="input" id="email" name="email" type="email" autocomplete="off" required aria-describedby="error-email">
+        <p class="error" id="error-email" hidden></p>
+      </div>
+      <!-- Phone is NOT in the Figma design. The API's create-user endpoint may require it, so it is here as an optional field. Confirm with the backend team. -->
+      <div class="field field--tight">
+        <label class="label" for="phone">Phone (optional)</label>
+        <input class="input" id="phone" name="phone" type="tel" autocomplete="off" aria-describedby="error-phone">
+        <p class="error" id="error-phone" hidden></p>
+      </div>
+      <div class="field field--tight">
+        <label class="label" for="password">Password</label>
+        <input class="input" id="password" name="password" type="password" autocomplete="new-password" minlength="8" required aria-describedby="error-password">
+        <p class="error" id="error-password" hidden></p>
+      </div>
+
+      <p class="error" id="add-error" role="alert" hidden></p>
+
+      <div class="modal__actions">
+        <button type="submit" class="btn btn--primary btn--lg" id="add-submit">Add Reviewer</button>
+        <button type="button" class="btn btn--lg" data-close>Cancel</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="../author/api.js"></script>
+  <script src="../auth/guard.js" data-role="portal_admin"></script>
+  <script src="admin-core.js"></script>
+  <script src="reviewers.js"></script>
+</body>
+</html>
