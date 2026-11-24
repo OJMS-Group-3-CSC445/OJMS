@@ -132,17 +132,17 @@ OJMS-Frontend/
 
 ## 6. Getting Started
 
-Setup instructions will be updated once the development environment and dependencies have been finalized.
+This author dashboard is a static HTML/CSS/JavaScript frontend and does not need a package install. Serve the repository with the development server used by the team; opening the HTML files directly may prevent API requests because of browser origin restrictions.
 
-General workflow:
+### Authentication and author API integration
 
-1. Clone the repository.
-2. Navigate into the frontend directory.
-3. Install the required dependencies.
-4. Configure environment variables where necessary.
-5. Start the development server.
+The API base URL defaults to `http://127.0.0.1:8000/api`. Define `window.OJMS_API_BASE_URL` before loading `author/api.js` to use another API origin. Login posts to `/login`; registration posts the documented name, email, phone, password, and password-confirmation fields to `/register`. Author and Editor-in-Chief logins store the Sanctum bearer token and user profile in session storage for the current browser tab. Logout revokes the token through `/logout` and clears the local session.
 
-Use the package manager and commands specified by the development team.
+The author dashboard and manuscript-submission page require an authenticated `author` account. The Editor-in-Chief dashboard requires an authenticated `editor_in_chief` account and loads submissions from `/editor/articles`. Requests send the token in the `Authorization` header and use the documented `/my-articles`, `/my-articles/{article}`, `/articles`, and `/editor/articles` routes. Manuscript uploads use `FormData` and leave the multipart content type boundary to the browser.
+
+The page guard is a user-interface safeguard, not a security boundary: the API must enforce authentication, role permissions, and ownership on every protected endpoint. When the frontend and API use different origins, the API server must allow the frontend origin and the `Authorization`, `Accept`, and `Content-Type` headers through CORS.
+
+When the frontend and API use different origins, the API server must allow the frontend origin and the `Authorization`, `Accept`, and `Content-Type` headers through CORS.
 
 Never commit API keys, passwords, tokens, or private environment configuration files.
 

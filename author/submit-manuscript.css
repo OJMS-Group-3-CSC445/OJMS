@@ -1,0 +1,65 @@
+.submit-panel {
+  width: min(100%, 760px);
+  margin: 0 auto;
+  padding: clamp(22px, 5vw, 48px);
+  border: 1px solid var(--author-line);
+  border-radius: 8px;
+  background: #fff;
+}
+.back-link {
+  display: inline-block;
+  margin-bottom: 24px;
+  color: var(--author-red);
+  font-size: 14px;
+  font-weight: 500;
+}
+.submit-panel h1 {
+  margin: 0;
+  font-size: clamp(26px, 4vw, 32px);
+  line-height: 1.3;
+  font-weight: 600;
+}
+.submit-intro {
+  margin: 8px 0 28px;
+  color: var(--author-muted);
+  font-size: 15px;
+  line-height: 1.5;
+}
+.submit-panel form { display: grid; gap: 10px; }
+.submit-panel label {
+  margin-top: 10px;
+  color: var(--author-ink);
+  font-size: 14px;
+  font-weight: 600;
+}
+.submit-panel label span[aria-hidden="true"] { color: var(--author-red); }
+.submit-panel .optional-label { color: var(--author-muted); font-size: 12px; font-weight: 400; }
+.submit-panel input,
+.submit-panel textarea {
+  width: 100%;
+  min-height: 44px;
+  padding: 11px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  color: var(--author-ink);
+  background: #fff;
+  font: inherit;
+  font-size: 14px;
+}
+.submit-panel textarea { min-height: 150px; resize: vertical; line-height: 1.5; }
+.submit-panel input[type="file"] { min-height: 48px; padding: 8px; }
+.submit-panel input:focus,
+.submit-panel textarea:focus { outline: 2px solid #991b1b33; border-color: var(--author-red); }
+.field-hint { margin: -4px 0 4px; color: var(--author-muted); font-size: 12px; }
+.submit-actions { display: flex; align-items: center; gap: 20px; margin-top: 18px; }
+.submit-actions .submit-button { cursor: pointer; }
+.submit-actions .submit-button:disabled { opacity: .6; cursor: wait; }
+.cancel-link { color: var(--author-muted); font-size: 14px; }
+.cancel-link:hover { color: var(--author-red); }
+
+@media (max-width: 600px) {
+  .submit-panel { padding: 22px 18px; }
+  .submit-actions { align-items: stretch; flex-direction: column; gap: 14px; }
+  .submit-actions .submit-button { width: 100%; }
+  .cancel-link { text-align: center; }
+}

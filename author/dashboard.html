@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#faf9f6">
   <title>My submissions | OJMS</title>
+  <script src="./api.js"></script>
+  <script src="../auth/guard.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -18,10 +20,10 @@
       <span class="author-name">[Author name]</span>
     </a>
     <nav class="author-nav" aria-label="Author navigation">
-      <a class="is-current" href="#dashboard" aria-current="page">Dashboard</a>
-      <a href="#submit-manuscript">Submit manuscript</a>
+      <a class="is-current" href="./dashboard.html" aria-current="page">Dashboard</a>
+      <a href="./submit-manuscript.html">Submit manuscript</a>
       <a class="author-nav-name" href="#profile">[Author name]</a>
-      <a href="#logout">Log out</a>
+      <button type="button" data-action="logout">Log out</button>
     </nav>
   </header>
 
@@ -32,8 +34,10 @@
           <h1 id="submissions-title">My submissions</h1>
           <p>Track the status of your manuscripts and access submission details.</p>
         </div>
-        <a class="submit-button" href="#submit-manuscript">Submit Manuscript</a>
+        <a class="submit-button" href="./submit-manuscript.html">Submit Manuscript</a>
       </div>
+
+      <p class="dashboard-feedback" id="dashboard-feedback" role="status" hidden></p>
 
       <div class="table-scroll" tabindex="0" aria-label="Submission list, scroll horizontally on smaller screens" hidden>
         <table class="submission-table">
@@ -49,10 +53,16 @@
         </table>
       </div>
 
-      <section class="empty-state" aria-labelledby="empty-state-title">
+      <nav class="submission-pagination" aria-label="Submissions pages" hidden>
+        <button type="button" data-page="previous">Previous</button>
+        <span aria-live="polite"></span>
+        <button type="button" data-page="next">Next</button>
+      </nav>
+
+      <section class="empty-state" aria-labelledby="empty-state-title" hidden>
         <h2 id="empty-state-title">You haven't submitted a manuscript yet</h2>
         <p>Submit your first manuscript to begin tracking its review status.</p>
-        <a class="empty-submit-button" href="#submit-manuscript">Submit Manuscript</a>
+        <a class="empty-submit-button" href="./submit-manuscript.html">Submit Manuscript</a>
       </section>
     </section>
   </main>
@@ -106,7 +116,11 @@
         <h4>Decision date</h4>
         <p id="dialog-decision-date" class="dialog-note"></p>
       </section>
-      <button class="download-link" type="button" disabled>Download File</button>
+      <section class="dialog-field dialog-review-field" id="dialog-review-section" hidden>
+        <h4>Reviewer feedback</h4>
+        <ul id="dialog-reviews"></ul>
+      </section>
+      <a class="download-link" id="file-download" href="#" target="_blank" rel="noopener" hidden>Download File</a>
     </div>
     <button class="dialog-bottom-close" type="button">Close</button>
   </dialog>
