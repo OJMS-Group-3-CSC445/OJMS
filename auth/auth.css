@@ -1,288 +1,401 @@
-/* Login */
-.login-main {
-  min-height: 520px;
+/* Auth Layout (Shared by Login & Register) */
+.login-main
+{
+  min-height: calc(100vh - 200px);
   display: grid;
-  place-items: start center;
+  place-items: center;
   padding: 64px 24px 80px;
   background: var(--cream);
 }
 
-.login-card {
-  width: min(540px, 100%);
-  height: min(540px, 100%);
+.login-card
+{
+  width: min(480px, 100%);
   background: var(--white);
-  border: 1px solid #e1e1dc;
-  border-radius: 5px;
-  box-shadow: 0 8px 24px rgba(31, 42, 68, 0.06);
-  /* padding: 26px 20px 20px; */
-  padding: 32px 20px 26px;;
-  /* margin-top: 32px; */
+  border: 1px solid var(--border);
+  border-radius: var(--radius, 10px);
+  box-shadow: var(--shadow, 0 8px 24px rgba(15, 23, 42, 0.06));
+  padding: 40px 36px 36px;
 }
 
-.register-card {
-  height: auto;
+.register-card
+{
+  width: min(520px, 100%);
 }
 
-.register-form .form-field {
-  margin-top: 0;
+.auth-eyebrow
+{
+  margin: 0 0 8px;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--crimson);
 }
 
-.verify-email-UI {
-  width: min(540px, 100%);
-  min-height: 460px;
-  padding: 64px 32px 40px;
+.login-card-header
+{
+  margin-bottom: 24px;
+}
+
+.login-card-header h1
+{
+  font-family: var(--font-serif);
+  font-size: clamp(1.75rem, 3vw, 2.1rem);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--navy);
+  margin: 0;
+}
+
+.login-card-header p:not(.auth-eyebrow)
+{
+  margin: 8px 0 0;
+  font-size: 0.95rem;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+/* Feedback Banner */
+.auth-feedback
+{
+  margin: 0 0 20px;
+  padding: 12px 14px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  line-height: 1.45;
+  background: #f8fafc;
+  color: var(--navy);
+  border: 1px solid var(--border);
+}
+
+.auth-feedback[data-kind="error"]
+{
+  background: #fef2f2;
+  color: #991b1b;
+  border-color: #fecaca;
+}
+
+.auth-feedback[data-kind="success"]
+{
+  background: #f0fdf4;
+  color: #166534;
+  border-color: #bbf7d0;
+}
+
+.auth-feedback[data-kind="info"]
+{
+  background: #eff6ff;
+  color: #1e3a8a;
+  border-color: #bfdbfe;
+}
+
+/* Form Elements */
+.login-form
+{
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.form-field
+{
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+.form-field label
+{
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--navy);
+}
+
+.form-field input
+{
+  width: 100%;
+  height: 46px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  background: var(--white);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  padding: 0 14px;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.form-field input::placeholder
+{
+  color: #94a3b8;
+}
+
+.form-field input:focus
+{
+  outline: none;
+  border-color: var(--crimson);
+  box-shadow: 0 0 0 3px rgba(153, 27, 27, 0.14);
+}
+
+.password-toggle
+{
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  padding: 0;
+  background-color: var(--white);
+  color: var(--muted);
+  border: 1px solid #cbd5e1;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.18s ease, color 0.18s ease;
+}
+
+.password-toggle:hover
+{
+  background-color: var(--cream);
+  color: var(--crimson);
+}
+
+/* Password Field + Toggle */
+.password-field
+{
+  display: flex;
+  align-items: stretch;
+}
+
+.password-field input
+{
+  flex: 1 1 auto;
+  min-width: 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-right: 0;
+}
+
+
+
+.password-toggle:focus-visible
+{
+  outline: 2px solid var(--navy);
+  outline-offset: -2px;
+}
+
+/* Submit Button */
+.login-submit
+{
+  width: 100%;
+  min-height: 46px;
+  margin-top: 4px;
+  border: 0;
+  border-radius: 6px;
+  background: var(--crimson);
+  color: var(--white);
+  font-family: var(--font-sans);
+  font-size: 0.96rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.18s ease, transform 0.15s ease, opacity 0.18s ease;
+}
+
+.login-submit:hover:not(:disabled)
+{
+  background: var(--crimson-dark);
+  transform: translateY(-1px);
+}
+
+.login-submit:disabled
+{
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Register Link */
+.Register-link
+{
+  text-align: center;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  font-size: 0.92rem;
+  color: var(--muted);
+}
+
+.Register-link p,
+.Register-link a
+{
+  display: inline;
+  margin: 0;
+}
+
+.Register-link a
+{
+  color: var(--crimson);
+  font-weight: 600;
+  margin-left: 4px;
+}
+
+.Register-link a:hover
+{
+  color: var(--crimson-dark);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+[hidden]
+{
+  display: none !important;
+}
+
+/* Preserved Verification UI Styles (used by register.html) */
+.verify-email-UI,
+.verified-UI
+{
+  width: min(500px, 100%);
+  padding: 48px 32px 40px;
   text-align: center;
   background: var(--white);
-  border: 1px solid #e1e1dc;
-  border-radius: 5px;
-  box-shadow: 0 8px 24px rgba(31, 42, 68, 0.06);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--crimson);
+  border-radius: var(--radius, 10px);
+  box-shadow: var(--shadow, 0 8px 24px rgba(15, 23, 42, 0.06));
 }
 
-.verify-email-icon {
-  width: 76px;
-  height: 76px;
+.verify-email-icon,
+.verified-icon
+{
+  width: 72px;
+  height: 72px;
   margin: 0 auto 24px;
   display: grid;
   place-items: center;
   border-radius: 50%;
+}
+
+.verify-email-icon
+{
   background: var(--navy);
 }
 
-.verify-email-icon svg {
-  width: 34px;
-  height: 34px;
-  fill: none;
-  stroke: var(--white);
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 1.8;
-}
-
-.verify-email-UI h1 {
-  color: var(--navy);
-  font: 600 30px/1.2 var(--font-serif);
-}
-
-.verify-email-message {
-  margin: 16px 0 32px;
-  color: #7a8496;
-  font-size: 16px;
-}
-
-.verify-email-resend {
-  width: min(320px, 100%);
-  min-height: 48px;
-  border: 1px solid var(--border);
-  border-radius: 5px;
-  background: var(--white);
-  color: var(--crimson);
-  font: 600 16px var(--font-sans);
-  cursor: pointer;
-}
-
-.verify-email-resend:hover {
-  background: var(--cream);
-}
-
-.verify-email-status {
-  margin: 24px 0 0;
-  color: #7a8496;
-  font-size: 14px;
-}
-
-.verified-UI {
-  width: min(420px, 100%);
-  min-height: 400px;
-  padding: 32px 32px 40px;
-  text-align: center;
-  background: var(--white);
-  border: 1px solid #e1e1dc;
-  border-radius: 5px;
-  box-shadow: 0 8px 24px rgba(31, 42, 68, 0.06);
-}
-
-.verified-icon {
-  width: 76px;
-  height: 76px;
-  margin: 0 auto 28px;
-  display: grid;
-  place-items: center;
-  border-radius: 50%;
+.verified-icon
+{
   background: #15803d;
 }
 
-.verified-icon svg {
-  width: 34px;
-  height: 34px;
+.verify-email-icon svg,
+.verified-icon svg
+{
+  width: 32px;
+  height: 32px;
   fill: none;
   stroke: var(--white);
   stroke-linecap: round;
   stroke-linejoin: round;
-  stroke-width: 3;
+  stroke-width: 2.2;
 }
 
-.verified-UI h1 {
+.verify-email-UI h1,
+.verified-UI h1
+{
   color: var(--navy);
-  font: 600 26px/1.2 var(--font-serif);
+  font: 700 1.75rem/1.2 var(--font-serif);
 }
 
-.verified-message {
-  margin: 28px 0 48px;
-  color: #7a8496;
-  font-size: 16px;
+.verify-email-message,
+.verified-message
+{
+  margin: 16px 0 32px;
+  color: var(--muted);
+  font-size: 0.98rem;
 }
 
-.verified-login-link {
-  width: min(280px, 100%);
-  min-height: 48px;
+.verify-email-resend
+{
+  width: min(300px, 100%);
+  min-height: 46px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--white);
+  color: var(--crimson);
+  font: 600 0.95rem var(--font-sans);
+  cursor: pointer;
+}
+
+.verify-email-resend:hover
+{
+  background: var(--cream);
+}
+
+.verify-email-status
+{
+  margin: 20px 0 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.verified-login-link
+{
+  width: min(260px, 100%);
+  min-height: 46px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--crimson);
-  border-radius: 5px;
+  border-radius: 6px;
   background: var(--crimson);
   color: var(--white);
-  font-size: 16px;
+  font-size: 0.95rem;
   font-weight: 600;
 }
 
-.verified-login-link:hover {
+.verified-login-link:hover
+{
   background: var(--crimson-dark);
 }
 
-.login-card-header {
-  /* text-align: center; */
-  margin-top: 24px;
-  margin-bottom: 22px;
-}
-
-.login-card-header h1 {
-  font-size: 32px;
-  line-height: 1.2;
-  color: var(--navy);
-  font-family: var(--font-serif);
-}
-
-.login-card-header p {
-  margin: 5px 0 0;
-  font-size: 16px;
-  color: #7a8496;
-  font-family: var(--font-sans);
-}
-
-.login-form {
-    margin-top: 32px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-
-.form-field {
-    margin-top: 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    width: 100%;
-}
-
-.form-field label {
-  font-size: 16px;
-  font-weight: 600;
-  color: var(--navy);
-}
-
-.form-field input {
-  width: 100%;
-  height: 44px;
-  border: 1px solid #dde1e7;
-  border-radius: 4px;
-  background: #fff;
-  color: var(--ink);
-  font: 0.75rem var(--font-sans);
-  padding: 0 10px;
-}
-
-.form-field input:focus {
-  border-color: #7d8798;
-  outline: 2px solid rgba(155, 28, 28, 0.12);
-  outline-offset: 1px;
-}
-
-.password-field {
-    display: flex;
-}
-
-.password-field input {
-  padding-right: 58px;
-  flex-basis: 75%;
-}
-
-.password-toggle {
-    flex-basis: 25%;
-    background-color: var(--white);
-    color: #991B1B;
-    text-align: center;
-    font-family: var(--font-sans);
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 18px; /* 138.462% */
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    cursor: pointer;
-
-}
-.Register-link a,
-.Register-link p{
-    display: inline;
-}
-.Register-link{
-    text-align: center;
-}
-
-[hidden] {
-  display: none !important;
-}
-
-.auth-feedback {
-  margin: 0 0 16px;
-  color: #7a8496;
-  font-size: 14px;
-}
-
-.auth-feedback[data-kind="error"] {
-  color: #991b1b;
-}
-
-.auth-feedback[data-kind="success"] {
-  color: #166534;
-}
-.Register-link a{
-    color: var(--crimson);
-    font-weight: 600;
-}
-.login-submit {
-  height: 34px;
-  border: 0;
-  border-radius: 3px;
-  background: var(--crimson);
-  color: var(--white);
-  font: 600 16x var(--font-sans);
-  cursor: pointer;
-  margin-top: 3px;
-}
-
-.login-submit:hover {
-  background: var(--crimson-dark);
-}
-
-@media (max-width: 640px) {
-  .login-main {
-    min-height: 440px;
+/* Responsive */
+@media (max-width: 640px)
+{
+  .login-main
+  {
     padding: 40px 16px 56px;
   }
 
-  .login-card {
-    max-width: 400px;
+  .login-card
+  {
+    padding: 28px 20px 24px;
   }
+}
+
+
+
+.field-hint
+{
+  font-size: 0.82rem;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+.verify-email-UI,
+.verified-UI
+{
+  width: min(500px, 100%);
+  padding: 48px 32px 40px;
+  text-align: center;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius, 10px);
+  box-shadow: var(--shadow, 0 8px 24px rgba(15, 23, 42, 0.06));
+}
+
+.verified-message
+{
+  margin: 16px 0 32px;
+  color: var(--muted);
+  font-size: 0.98rem;
+  overflow-wrap: break-word;
 }

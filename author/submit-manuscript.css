@@ -63,3 +63,246 @@
   .submit-actions .submit-button { width: 100%; }
   .cancel-link { text-align: center; }
 }
+
+/* =========================================
+   SUBMIT MANUSCRIPT PAGE ALIGNMENT
+========================================= */
+
+.submit-manuscript-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: clip;
+}
+
+.submit-manuscript-main {
+    width: 100%;
+    flex: 1;
+    padding: 130px clamp(24px, 5vw, 80px) 60px;
+}
+
+/* Submission panel uses the same page lane */
+.submit-panel {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: clamp(24px, 3vw, 40px);
+    border: 1px solid var(--author-line);
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.03);
+}
+
+/* Typography consistent with the portal */
+.submit-panel h1 {
+    font-size: clamp(28px, 3vw, 36px);
+    font-weight: 700;
+    color: var(--author-ink);
+}
+
+.submit-intro {
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+/* Full-width footer and bottom positioning */
+.submit-manuscript-page .author-footer-simple {
+    width: 100%;
+    margin-top: auto;
+    flex-shrink: 0;
+    border-radius: 0;
+}
+
+/* Responsive */
+@media (max-width: 760px) {
+    .submit-manuscript-main {
+        padding: 110px 20px 48px;
+    }
+
+    .submit-panel {
+        padding: 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    .submit-manuscript-main {
+        padding: 110px 16px 40px;
+    }
+
+    .submit-panel {
+        padding: 20px 18px;
+    }
+}
+
+/* =========================================
+   SUBMIT PAGE NAVIGATION & LAYOUT
+========================================= */
+
+.submit-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: clip;
+}
+
+.submit-page .author-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+/* Brand */
+.submit-page .author-brand-text {
+    color: var(--author-ink);
+    font-size: 17px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+/* Profile pill */
+.submit-page .author-nav-name {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 9px 16px;
+    border: 1px solid var(--author-line);
+    border-radius: 999px;
+    background: #fff;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.submit-page .author-user-icon {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+}
+
+/* Logout pill */
+.submit-page .author-logout {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 42px;
+    padding: 0 20px;
+    border: 1px solid var(--author-red);
+    border-radius: 999px;
+    background: var(--author-red);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* Hamburger */
+.submit-page .author-menu-toggle {
+    display: none;
+    width: 44px;
+    height: 44px;
+    padding: 10px;
+    border: 1px solid var(--author-line);
+    border-radius: 8px;
+    background: #fff;
+    cursor: pointer;
+}
+
+.submit-page .author-menu-toggle span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    margin: 5px auto;
+    background: var(--author-ink);
+    border-radius: 999px;
+}
+
+/* Content lane */
+.submit-page .author-main {
+    width: 100%;
+    flex: 1;
+    padding: 130px clamp(24px, 5vw, 80px) 60px;
+}
+
+/* Responsive nav */
+@media (max-width: 760px) {
+    .submit-page .author-header {
+        min-height: 76px;
+        height: 76px;
+        padding: 0 20px;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .submit-page .author-brand-text {
+        font-size: 15px;
+    }
+
+    .submit-page .author-menu-toggle {
+        display: block;
+        flex-shrink: 0;
+    }
+
+    .submit-page .author-nav {
+        position: absolute;
+        top: 76px;
+        left: 0;
+        right: 0;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 10px 20px 20px;
+        background: #faf9f6;
+        border-bottom: 1px solid var(--author-line);
+        box-shadow: 0 12px 24px rgba(15, 23, 42, .06);
+
+        visibility: hidden;
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(-8px);
+        transition: opacity .2s ease, transform .2s ease, visibility .2s ease;
+    }
+
+    .submit-page .author-nav.is-open {
+        visibility: visible;
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+    }
+
+    .submit-page .author-nav > a {
+        display: block;
+        padding: 14px 8px;
+        border-bottom: 1px solid var(--author-line);
+    }
+
+    .submit-page .author-nav .author-nav-name {
+        width: fit-content;
+        margin: 12px 0;
+    }
+
+    .submit-page .author-nav form {
+        padding-top: 8px;
+    }
+
+    .submit-page .author-nav form button {
+        width: 100%;
+    }
+
+    .submit-page .author-main {
+        padding: 110px 20px 48px;
+    }
+}
+
+@media (max-width: 480px) {
+    .submit-page .author-header {
+        padding: 0 16px;
+    }
+
+    .submit-page .author-main {
+        padding: 110px 16px 40px;
+    }
+}
