@@ -1,0 +1,381 @@
+/* Page Base */
+.contact-page
+{
+    background-color: var(--cream);
+    min-height: 60vh;
+}
+
+/* Compact Editorial Hero */
+.contact-hero
+{
+    position: relative;
+    min-height: 250px;
+    display: flex;
+    align-items: center;
+    padding: 64px 0 72px;
+    background-color: var(--navy-deep, #0F172A);
+    background-image:
+        linear-gradient(105deg,
+            rgba(15, 23, 42, 0.93) 0%,
+            rgba(30, 41, 59, 0.87) 58%,
+            rgba(30, 41, 59, 0.76) 100%),
+        url("https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=2000&q=85");
+    background-size: cover;
+    background-position: center;
+    color: var(--white);
+    overflow: hidden;
+}
+
+.contact-hero-content
+{
+    position: relative;
+    z-index: 1;
+}
+
+@keyframes contactFadeIn
+{
+    from
+    {
+        opacity: 0;
+    }
+
+    to
+    {
+        opacity: 1;
+    }
+}
+
+@keyframes contactFadeUp
+{
+    from
+    {
+        opacity: 0;
+        transform: translateY(14px);
+    }
+
+    to
+    {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero-eyebrow
+{
+    margin: 0 0 12px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #fca5a5;
+    animation: contactFadeIn 0.55s ease-out 0.08s both;
+}
+
+.contact-hero h1
+{
+    color: var(--white);
+    font-family: var(--font-serif);
+    font-size: clamp(1.9rem, 4.2vw, 2.75rem);
+    font-weight: 700;
+    line-height: 1.18;
+    animation: contactFadeUp 0.65s ease-out 0.18s both;
+}
+
+.hero-lead
+{
+    margin: 14px 0 0;
+    max-width: 58ch;
+    font-size: 1.02rem;
+    line-height: 1.65;
+    color: #e2e8f0;
+    animation: contactFadeUp 0.65s ease-out 0.28s both;
+}
+
+/* Main Two-Column Section */
+.contact-section
+{
+    padding: 64px 0 88px;
+}
+
+.contact-layout
+{
+    display: grid;
+    grid-template-columns: minmax(280px, 1fr) minmax(0, 1.45fr);
+    gap: 32px;
+    align-items: start;
+}
+
+/* Left Column: Editorial Office Card */
+.contact-info-card
+{
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--crimson);
+    border-radius: var(--radius);
+    padding: 32px 28px;
+    box-shadow: var(--shadow);
+    animation: contactFadeUp 0.6s ease-out 0.16s both;
+}
+
+.section-eyebrow
+{
+    margin: 0 0 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--crimson);
+}
+
+.contact-info-card h2,
+.contact-form-card h2
+{
+    font-family: var(--font-serif);
+    font-size: 1.45rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin: 0 0 8px;
+}
+
+.office-note,
+.form-intro
+{
+    margin: 0 0 24px;
+    font-size: 0.94rem;
+    color: var(--muted);
+    line-height: 1.55;
+}
+
+.contact-list
+{
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.contact-item
+{
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+}
+
+.contact-item:first-child
+{
+    padding-top: 0;
+    border-top: none;
+}
+
+.contact-icon
+{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+    border-radius: 8px;
+    background: rgba(153, 27, 27, 0.08);
+    color: var(--crimson);
+}
+
+.contact-body
+{
+    flex: 1;
+    min-width: 0;
+}
+
+.contact-label
+{
+    display: block;
+    margin-bottom: 3px;
+    font-size: 0.76rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+}
+
+.contact-value,
+.contact-address
+{
+    margin: 0;
+    font-style: normal;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--navy);
+    line-height: 1.55;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+.contact-value a
+{
+    color: var(--crimson);
+    text-decoration: none;
+}
+
+.contact-value a:hover
+{
+    color: var(--crimson-dark);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+/* Right Column: Contact Form Card */
+.contact-form-card
+{
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 36px;
+    box-shadow: var(--shadow);
+    animation: contactFadeUp 0.6s ease-out 0.24s both;
+}
+
+.contact-form
+{
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.form-row
+{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+}
+
+.form-group
+{
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-group label
+{
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--navy);
+}
+
+.req
+{
+    color: var(--crimson);
+}
+
+.form-group input,
+.form-group textarea
+{
+    width: 100%;
+    padding: 11px 14px;
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    color: var(--ink);
+    background: var(--white);
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.form-group textarea
+{
+    resize: vertical;
+    min-height: 130px;
+}
+
+.form-group input:focus,
+.form-group textarea:focus
+{
+    outline: none;
+    border-color: var(--crimson);
+    box-shadow: 0 0 0 3px rgba(153, 27, 27, 0.12);
+}
+
+.btn-submit
+{
+    align-self: flex-start;
+    padding: 12px 28px;
+    font-size: 0.95rem;
+}
+
+/* Form Alerts */
+.form-alert
+{
+    padding: 14px 16px;
+    border-radius: 6px;
+    font-size: 0.92rem;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.form-alert-success
+{
+    background: #f0fdf4;
+    color: #166534;
+    border: 1px solid #bbf7d0;
+}
+
+.form-alert-error
+{
+    background: #fef2f2;
+    color: #991b1b;
+    border: 1px solid #fecaca;
+}
+
+/* Responsive */
+@media (max-width: 860px)
+{
+    .contact-layout
+    {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+}
+
+@media (max-width: 640px)
+{
+    .contact-hero
+    {
+        min-height: 210px;
+        padding: 52px 0 60px;
+    }
+
+    .contact-section
+    {
+        padding: 40px 0 64px;
+    }
+
+    .contact-info-card,
+    .contact-form-card
+    {
+        padding: 24px 20px;
+    }
+
+    .form-row
+    {
+        grid-template-columns: 1fr;
+    }
+
+    .btn-submit
+    {
+        width: 100%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce)
+{
+
+    .hero-eyebrow,
+    .contact-hero h1,
+    .hero-lead,
+    .contact-info-card,
+    .contact-form-card
+    {
+        animation: none !important;
+    }
+}
