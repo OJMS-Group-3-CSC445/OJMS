@@ -1,0 +1,599 @@
+/* Hero Section */
+.hero
+{
+    position: relative;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    padding: 92px 0 100px;
+    background-color: var(--navy-deep);
+    background-image:
+        linear-gradient(105deg,
+            rgba(15, 23, 42, 0.92) 0%,
+            rgba(30, 41, 59, 0.85) 55%,
+            rgba(30, 41, 59, 0.72) 100%),
+        url("https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=2000&q=85");
+    background-size: cover;
+    background-position: center;
+    color: var(--white);
+    overflow: hidden;
+}
+
+.hero-content
+{
+    position: relative;
+    z-index: 1;
+}
+
+/* Hero Staggered Load Animations */
+@keyframes heroFadeIn
+{
+    from
+    {
+        opacity: 0;
+    }
+
+    to
+    {
+        opacity: 1;
+    }
+}
+
+@keyframes heroFadeUp
+{
+    from
+    {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+
+    to
+    {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero-eyebrow
+{
+    margin: 0 0 16px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #fca5a5;
+    animation: heroFadeIn 0.6s ease-out 0.1s both;
+}
+
+.hero h1
+{
+    color: var(--white);
+    font-size: clamp(2.2rem, 4.8vw, 3.25rem);
+    font-weight: 700;
+    line-height: 1.15;
+    max-width: 18ch;
+    animation: heroFadeUp 0.7s ease-out 0.22s both;
+}
+
+.hero-lead
+{
+    margin: 20px 0 32px;
+    max-width: 60ch;
+    font-size: 1.08rem;
+    line-height: 1.65;
+    color: #e2e8f0;
+    animation: heroFadeUp 0.7s ease-out 0.36s both;
+}
+
+.hero-actions
+{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    animation: heroFadeUp 0.7s ease-out 0.5s both;
+}
+
+.btn-lg
+{
+    padding: 13px 26px;
+    font-size: 0.95rem;
+}
+
+.btn-hero-secondary
+{
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--white);
+    border: 1px solid rgba(255, 255, 255, 0.45);
+}
+
+.btn-hero-secondary:hover
+{
+    background: rgba(255, 255, 255, 0.18);
+    border-color: var(--white);
+}
+
+/* Scroll-Reveal Progressive Enhancement */
+.js-reveal-ready [data-reveal]
+{
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.js-reveal-ready [data-reveal].is-visible
+{
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Subtle stagger for sibling cards */
+.js-reveal-ready .card[data-reveal]:nth-child(2),
+.js-reveal-ready .article-card[data-reveal]:nth-child(2)
+{
+    transition-delay: 0.08s;
+}
+
+.js-reveal-ready .card[data-reveal]:nth-child(3),
+.js-reveal-ready .article-card[data-reveal]:nth-child(3)
+{
+    transition-delay: 0.16s;
+}
+
+.js-reveal-ready .card[data-reveal]:nth-child(4),
+.js-reveal-ready .article-card[data-reveal]:nth-child(4)
+{
+    transition-delay: 0.08s;
+}
+
+.js-reveal-ready .card[data-reveal]:nth-child(5)
+{
+    transition-delay: 0.16s;
+}
+
+.js-reveal-ready .card[data-reveal]:nth-child(6)
+{
+    transition-delay: 0.24s;
+}
+
+/* Shared Section Header */
+.section-header
+{
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+}
+
+.section-eyebrow
+{
+    margin: 0 0 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--crimson);
+}
+
+.section-header h2
+{
+    font-size: clamp(1.5rem, 2.5vw, 1.9rem);
+    font-weight: 700;
+}
+
+.section-link
+{
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--crimson);
+    transition: color 0.15s ease;
+}
+
+.section-link:hover
+{
+    color: var(--crimson-dark);
+    text-decoration: underline;
+}
+
+/* Published Research Section */
+.published-section
+{
+    background: var(--white);
+    padding: 72px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.articles-grid
+{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+}
+
+.article-card
+{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 28px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+}
+
+.article-card:hover
+{
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-hover);
+    border-color: #cbd5e1;
+}
+
+.article-meta
+{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.82rem;
+    color: var(--muted);
+    font-weight: 500;
+}
+
+.article-title
+{
+    font-size: 1.25rem;
+    line-height: 1.35;
+}
+
+.article-title a
+{
+    transition: color 0.15s ease;
+}
+
+.article-title a:hover
+{
+    color: var(--crimson);
+}
+
+.article-authors
+{
+    margin: 0;
+    font-size: 0.92rem;
+    font-weight: 500;
+    color: var(--navy);
+}
+
+.article-abstract
+{
+    margin: 4px 0 8px;
+    font-size: 0.95rem;
+    color: var(--muted);
+    line-height: 1.6;
+}
+
+.card-link
+{
+    margin-top: auto;
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--crimson);
+}
+
+.card-link:hover
+{
+    text-decoration: underline;
+}
+
+.empty-state
+{
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 36px 28px;
+    text-align: center;
+}
+
+.empty-state h3
+{
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+}
+
+.empty-state p
+{
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.95rem;
+}
+
+/* Explore the Journal Cards */
+.cards
+{
+    background: var(--cream);
+    padding: 72px 0 84px;
+}
+
+.card-grid
+{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.card
+{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px;
+    box-shadow: var(--shadow);
+    min-height: 260px;
+    transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+}
+
+.card:hover
+{
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-hover);
+    border-color: #cbd5e1;
+}
+
+.card h3
+{
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.card p
+{
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--muted);
+}
+
+.issue-badge
+{
+    font-size: 0.82rem !important;
+    font-weight: 600;
+    color: var(--crimson) !important;
+    letter-spacing: 0.02em;
+}
+
+.issue-title
+{
+    color: var(--navy) !important;
+}
+
+.stat-note
+{
+    font-size: 0.88rem !important;
+    font-weight: 600;
+    color: var(--navy) !important;
+}
+
+.empty-inline
+{
+    font-style: italic;
+    color: var(--muted);
+}
+
+.card .link
+{
+    margin-top: auto;
+    padding-top: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--crimson);
+}
+
+.card .link:hover
+{
+    text-decoration: underline;
+}
+
+.people
+{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 10px;
+}
+
+.people li
+{
+    display: flex;
+    flex-direction: column;
+    font-size: 0.95rem;
+    color: var(--navy);
+}
+
+.people span
+{
+    font-size: 0.85rem;
+    color: var(--muted);
+}
+
+.label
+{
+    font-size: 0.82rem !important;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 600;
+}
+
+.email
+{
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--navy);
+    word-break: break-word;
+}
+
+.email:hover
+{
+    color: var(--crimson);
+    text-decoration: underline;
+}
+
+/* CTA Section with Background Image + Crimson Gradient Overlay */
+.cta
+{
+    position: relative;
+    background-color: var(--crimson);
+    background-image:
+        linear-gradient(105deg,
+            rgba(153, 27, 27, 0.94) 0%,
+            rgba(127, 23, 23, 0.86) 100%),
+        url("https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=2000&q=85");
+    background-size: cover;
+    background-position: center;
+    color: var(--white);
+    padding: 72px 0;
+    overflow: hidden;
+}
+
+.inner-cta
+{
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px;
+    flex-wrap: wrap;
+}
+
+.cta-copy
+{
+    max-width: 58ch;
+}
+
+.cta h2
+{
+    color: var(--white);
+    font-size: clamp(1.5rem, 2.6vw, 1.95rem);
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.cta-copy p
+{
+    margin: 0;
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 1rem;
+}
+
+.cta-btn
+{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px;
+}
+
+.btn-cta-outline
+{
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--white);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    padding: 11px 22px;
+    border-radius: 6px;
+}
+
+.btn-cta-outline:hover
+{
+    background: rgba(255, 255, 255, 0.18);
+    border-color: var(--white);
+}
+
+.cta-login
+{
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--white);
+    padding: 6px 4px;
+}
+
+.cta-login:hover
+{
+    text-decoration: underline;
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 960px)
+{
+    .card-grid
+    {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .articles-grid
+    {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 640px)
+{
+    .hero
+    {
+        min-height: 420px;
+        padding: 68px 0 76px;
+    }
+
+    .published-section,
+    .cards,
+    .cta
+    {
+        padding: 52px 0 60px;
+    }
+
+    .card-grid
+    {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-actions,
+    .cta-btn
+    {
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+    }
+
+    .cta-login
+    {
+        text-align: center;
+    }
+}
+
+@media (prefers-reduced-motion: reduce)
+{
+
+    .hero-eyebrow,
+    .hero h1,
+    .hero-lead,
+    .hero-actions
+    {
+        animation: none !important;
+    }
+
+    .js-reveal-ready [data-reveal]
+    {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+    }
+
+    .card:hover,
+    .article-card:hover
+    {
+        transform: none;
+    }
+}
